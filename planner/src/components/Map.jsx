@@ -53,6 +53,25 @@ function Map() {
         console.log("didn't work :(");
     };
 
+    const AirDesc = () => {
+        if (airPollution[0] >= 76) {
+            return <span>매우 나쁨</span>;
+        } else if (airPollution[0] >= 36) {
+            return <span>나쁨</span>;
+        } else if (airPollution[0] >= 16) {
+            return <span>보통</span>;
+        } else return <span>나쁨</span>;
+    };
+    const AirDesc1 = () => {
+        if (airPollution[1] >= 76) {
+            return <span>매우 나쁨</span>;
+        } else if (airPollution[1] >= 36) {
+            return <span>나쁨</span>;
+        } else if (airPollution[1] >= 16) {
+            return <span>보통</span>;
+        } else return <span>나쁨</span>;
+    };
+
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(geoOk, geoError);
         /**
@@ -77,7 +96,9 @@ function Map() {
                     />
                 </p>
                 <p>
-                    미세먼지 ? {airPollution[0]} 초미세먼지 ? {airPollution[1]}
+                    미세먼지 ? {airPollution[0]} <AirDesc /> 초미세먼지 ?{' '}
+                    {airPollution[1]}
+                    <AirDesc1 />
                 </p>
             </div>
         </div>
