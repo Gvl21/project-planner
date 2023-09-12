@@ -6,7 +6,8 @@ const API_KEY_WEATHER = '454424e4d734ed439e4de2476b24c478';
 
 function Map() {
     const [loading, setLoading] = useState(true);
-    // const [posi, setPosi] = useState([0.0, 0.0]);
+    const [posi, setPosi] = useState([0.0, 0.0]);
+    const [targetLocation, setTargetLocation] = useState({});
     const [temperature, setTemperature] = useState(0);
     const [condition, setCondition] = useState();
     const [altCondition, setAltCondition] = useState();
@@ -15,21 +16,37 @@ function Map() {
     const geoOk = (position) => {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-        // setPosi([lat, lng]);
+        // if (loading) {
+        //     setInterval(500, setPosi([lat, lng]));
+        //     setTimeout(2000, setLoading(false));
+        // }
 
-        // 위치 정보를 받아온 후에 지도 생성
+        // 위치 정보를 받아온 후에 지도 생성하기------------------
         const container = document.getElementById('map');
         const options = {
             center: new kakao.maps.LatLng(lat, lng),
-            level: 4,
+            level: 5,
         };
 
         const map = new kakao.maps.Map(container, options);
         getWeather(lat, lng);
         getAirPollution(lat, lng);
+        // 지도에 마커를 생성하고 표시한다
+        // 지도를 클릭한 위치에 표출할 마커입니다
+        let marker = new kakao.maps.Marker({
+            // 지도 중심좌표에 마커를 생성합니다
+            position: map.getCenter(),
+        });
+
+        // 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
+        kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+            // 클릭한 위도, 경도 정보를 가져옵니다
+            const latlng = mouseEvent.latLng;
+            marker.setPosition(latlng);
+        });
     };
 
-    //이어서 날씨정보도 가져옴
+    // 이어서 날씨정보도 가져옴------------------------
     const getWeather = async (lat, lng) => {
         const url = `https://api.openweathermap.org/data/2.5/weather?lang=kr&lat=${lat}&lon=${lng}&appid=${API_KEY_WEATHER}&units=metric`;
         const response = await (await fetch(url)).json();
@@ -50,7 +67,7 @@ function Map() {
      */
 
     const geoError = () => {
-        console.log("didn't work :(");
+        alert("location system didn't work :(");
     };
 
     const AirDesc = () => {
@@ -82,7 +99,9 @@ function Map() {
          */
         // console.log(posi);
     }, []);
-
+    // if (!loading) {
+    //     return <div id='loading'>로딩중입니다...</div>;
+    // } else {
     return (
         <div>
             <div id='map'></div>
@@ -97,12 +116,12 @@ function Map() {
                 </p>
                 <p>
                     미세먼지 ? {airPollution[0]} <AirDesc /> 초미세먼지 ?{' '}
-                    {airPollution[1]}
-                    <AirDesc1 />
+                    {airPollution[1]} <AirDesc1 />
                 </p>
             </div>
         </div>
     );
 }
+// }
 
 export default Map;
