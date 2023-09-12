@@ -10,6 +10,7 @@ function Map() {
     const [targetLocation, setTargetLocation] = useState({});
     const [temperature, setTemperature] = useState(0);
     const [condition, setCondition] = useState();
+    const [checked, setChecked] = useState(false);
     const [altCondition, setAltCondition] = useState();
     const [airPollution, setAirpollution] = useState([0.0, 0.0]);
 
@@ -37,11 +38,17 @@ function Map() {
             // 지도 중심좌표에 마커를 생성합니다
             position: map.getCenter(),
         });
-
+        let checking = () => {
+            marker.setMap(map);
+            setChecked(true);
+        };
         // 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
         kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
             // 클릭한 위도, 경도 정보를 가져옵니다
             const latlng = mouseEvent.latLng;
+            if (!checked) {
+                checking();
+            }
             marker.setPosition(latlng);
         });
     };
