@@ -32,7 +32,7 @@ function Weather({ currentLocation }) {
             return <span>나쁨</span>;
         } else if (airPollution[0] >= 16) {
             return <span>보통</span>;
-        } else return <span>나쁨</span>;
+        } else return <span>좋음</span>;
     };
     const AirDesc1 = () => {
         if (airPollution[1] >= 76) {
@@ -41,7 +41,7 @@ function Weather({ currentLocation }) {
             return <span>나쁨</span>;
         } else if (airPollution[1] >= 16) {
             return <span>보통</span>;
-        } else return <span>나쁨</span>;
+        } else return <span>좋음</span>;
     };
     useEffect(() => {
         if (!currentLocation) return;
