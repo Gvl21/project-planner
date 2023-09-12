@@ -5,9 +5,9 @@ const { kakao } = window;
 const API_KEY_WEATHER = '454424e4d734ed439e4de2476b24c478';
 
 function Map() {
-    const [loading, setLoading] = useState(true);
-    const [posi, setPosi] = useState([0.0, 0.0]);
-    const [targetLocation, setTargetLocation] = useState({});
+    // const [loading, setLoading] = useState(true);
+    // const [posi, setPosi] = useState([0.0, 0.0]);
+    const [targetLocation, setTargetLocation] = useState([0.0, 0.0]);
     const [temperature, setTemperature] = useState(0);
     const [condition, setCondition] = useState();
     const [checked, setChecked] = useState(false);
@@ -22,7 +22,7 @@ function Map() {
         //     setTimeout(2000, setLoading(false));
         // }
 
-        // 위치 정보를 받아온 후에 지도 생성하기------------------
+        // 위치 정보를 받아온 후에 지도 생성하기-----------------
         const container = document.getElementById('map');
         const options = {
             center: new kakao.maps.LatLng(lat, lng),
@@ -43,13 +43,21 @@ function Map() {
             setChecked(true);
         };
         // 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
-        kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+        kakao.maps.event.addListener(map, 'click', (mouseEvent) => {
             // 클릭한 위도, 경도 정보를 가져옵니다
             const latlng = mouseEvent.latLng;
             if (!checked) {
                 checking();
             }
             marker.setPosition(latlng);
+
+            let tempLat = latlng.getLat();
+            let tempLng = latlng.getLng();
+            /////////// 왜 값이 갱신이 안될까 ///////////////
+            setTargetLocation([tempLat, tempLng]);
+
+            console.log(targetLocation);
+            console.log(tempLat);
         });
     };
 
