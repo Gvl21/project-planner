@@ -5,9 +5,10 @@ const { kakao } = window;
 
 function Map({ currentLocation }) {
     const [loading, setLoading] = useState(true);
-    // const [posi, setPosi] = useState([0.0, 0.0]);
     const [targetLocation, setTargetLocation] = useState([0.0, 0.0]);
     const [checked, setChecked] = useState(false);
+
+    let map;
 
     const mapMaker = () => {
         if (!currentLocation) return;
@@ -18,69 +19,50 @@ function Map({ currentLocation }) {
                 center: new kakao.maps.LatLng(curLat, curLng),
                 level: 5,
             };
-        console.log(options);
-        const map = new kakao.maps.Map(container, options);
+        map = new kakao.maps.Map(container, options);
+        getMarker();
     };
 
-    // 위치 정보를 받아온 후에 지도 생성하기-----------------
+    const getMarker = () => {
+        if (!map) {
+            return;
+        }
 
-    // const getMarker = () => {
-    //     let marker = new kakao.maps.Marker({
-    //         // 지도 중심좌표에 마커를 생성합니다
-    //         position: map.getCenter(),
-    //     });
-    //     let checking = () => {
-    //         marker.setMap(map);
-    //         setChecked(true);
-    //     };
+        let marker = new kakao.maps.Marker({
+            position: map.getCenter(),
+        });
 
-    //     // 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
-    //     kakao.maps.event.addListener(map, 'click', (mouseEvent) => {
-    //         // 클릭한 위도, 경도 정보를 가져옵니다
-    //         const latlng = mouseEvent.latLng;
-    //         if (!checked) {
-    //             checking();
-    //         }
-    //         marker.setPosition(latlng);
+        let checking = () => {
+            marker.setMap(map);
+            setChecked(true);
+        };
 
-    //         let tempLat = latlng.getLat();
-    //         let tempLng = latlng.getLng();
-    //         /////////// 왜 값이 갱신이 안될까 ///////////////
-    //         setTargetLocation([tempLat, tempLng]);
+        kakao.maps.event.addListener(map, 'click', (mouseEvent) => {
+            const latlng = mouseEvent.latLng;
+            if (!checked) {
+                checking();
+            }
+            marker.setPosition(latlng);
 
-    //         console.log(targetLocation);
-    //         console.log(tempLat);
-    //     });
-    // };
-
-    // 지도에 마커를 생성하고 표시한다
-    // 지도를 클릭한 위치에 표출할 마커입니다
-
-    /**
-     *
-     */
+            let tempLat = latlng.getLat();
+            let tempLng = latlng.getLng();
+            setTargetLocation([tempLat, tempLng]);
+        });
+    };
 
     useEffect(() => {
         mapMaker();
     }, [currentLocation]);
-    /**
-     * -----질문하기 ------------------
-     * setPosi 이전에 렌더링 과정에서 console.log 를 실행해서 [0,0]이 나오는 건지
-     * 즉 위의 await 전에 useEffect를 먼저 실행해서 그런건가?
-     *
-     */
-    // console.log(posi);
 
-    // if (!loading) {
-    //     return <div id='loading'>로딩중입니다...</div>;
-    // } else {
+    useEffect(() => {
+        console.log(targetLocation);
+    }, [targetLocation]);
+
     return (
         <div>
             <div id='map'></div>
         </div>
     );
 }
-
-// }
 
 export default Map;
