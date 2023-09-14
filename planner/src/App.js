@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import Map from './components/Map';
-import Weather from './components/Weather';
+import { Route, Routes } from 'react-router-dom';
+import Main from './pages/Main';
+
+export const StateContext = React.createContext();
 
 function App() {
     const [currentLocation, setCurrentLocation] = useState(null);
@@ -11,7 +13,6 @@ function App() {
         const lng = position.coords.longitude;
         setCurrentLocation([lat, lng]);
         setLoading(false);
-        console.log(currentLocation);
     };
     const geoError = () => {
         alert('위치를 가져올 수 없습니다.');
@@ -19,13 +20,17 @@ function App() {
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(geoOk, geoError);
+        console.log(currentLocation);
     }, [loading]);
 
     return (
-        <div className='App'>
-            <Map currentLocation={currentLocation} />
-            <Weather currentLocation={currentLocation} />
-        </div>
+        <StateContext.Provider value={currentLocation}>
+            <div className='App'>
+                <Routes>
+                    <Route path='/' element={<Main />} />
+                </Routes>
+            </div>
+        </StateContext.Provider>
     );
 }
 

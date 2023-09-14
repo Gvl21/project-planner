@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { StateContext } from '../App';
 import './Map.css';
 
 const { kakao } = window;
 
-function Map({ currentLocation }) {
-    const [loading, setLoading] = useState(true);
+function Map() {
+    const currentLocation = useContext(StateContext);
     const [targetLocation, setTargetLocation] = useState([0.0, 0.0]);
     const [checked, setChecked] = useState(false);
 
@@ -59,7 +60,8 @@ function Map({ currentLocation }) {
     }, [targetLocation]);
 
     return (
-        <div>
+        <div id='map-layer'>
+            <h3>현재 위치</h3>
             <div id='map'></div>
         </div>
     );

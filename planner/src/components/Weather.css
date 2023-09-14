@@ -1,3 +1,32 @@
 #weather {
-    position: relative;
+    font-size: 1.5rem;
+    margin-left: 30px;
+    margin-top: 40px;
+}
+#condition {
+    display: flex;
+    align-items: center;
+    margin: 3px;
+    justify-content: center;
+}
+.air-pol {
+    font-size: 0.9rem;
+}
+
+#weather-header {
+    font-size: 3rem;
+    font-weight: bolder;
+    margin: 2px;
+    position: absolute;
+    top: 10%;
+    left: 50vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    transform: translate(-50%, -50%);
+}
+
+#weather-header p {
+    margin: 0;
 }

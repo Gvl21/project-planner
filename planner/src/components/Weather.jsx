@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { StateContext } from '../App';
+import './Weather.css';
 
 const API_KEY_WEATHER = '454424e4d734ed439e4de2476b24c478';
 
-function Weather({ currentLocation }) {
+function Weather() {
+    const currentLocation = useContext(StateContext);
     const [temperature, setTemperature] = useState(0);
     const [condition, setCondition] = useState();
     const [altCondition, setAltCondition] = useState();
     const [airPollution, setAirpollution] = useState([0.0, 0.0]);
-    const [loading, setLoading] = useState(true);
-
+    const [city, setCity] = useState();
     // 이어서 날씨정보도 가져옴------------------------
     const getWeather = async (lat, lng) => {
         const url = `https://api.openweathermap.org/data/2.5/weather?lang=kr&lat=${lat}&lon=${lng}&appid=${API_KEY_WEATHER}&units=metric`;
         const response = await (await fetch(url)).json();
         setTemperature(response.main.temp);
+        setCity(response.name);
         setCondition(response.weather[0].icon);
         setAltCondition(response.weather[0].description);
         console.log(response);
@@ -43,6 +46,13 @@ function Weather({ currentLocation }) {
             return <span>보통</span>;
         } else return <span>좋음</span>;
     };
+    const Message = () => {
+        if (airPollution[0] >= 76 || airPollution[1] >= 66) {
+            return <p>미세먼지가 너무 심해요. 외출하지마세요.</p>;
+        } else if (airPollution[0] >= 36 || airPollution[1] >= 36) {
+            return <p>미세먼지가 심해요. 마스크 챙기세요.</p>;
+        } else return <p>오늘도 즐거운 산책!</p>;
+    };
     useEffect(() => {
         if (!currentLocation) return;
         const lat = currentLocation[0];
@@ -53,17 +63,28 @@ function Weather({ currentLocation }) {
 
     return (
         <div id='weather'>
-            <p>지금 온도는 ? {temperature}</p>
+            <div id='weather-header'>
+                <Message />
+                <p id='condition'>
+                    날씨 :
+                    <img
+                        src={`http://openweathermap.org/img/w/${condition}.png`}
+                        alt={altCondition}
+                    />
+                </p>
+            </div>
             <p>
-                지금 날씨는 ?
-                <img
-                    src={`http://openweathermap.org/img/w/${condition}.png`}
-                    alt={altCondition}
-                />
+                {city}의 기온 : {temperature}
+            </p>
+
+            <p>
+                미세먼지 : <AirDesc />
+                <span className='air-pol'>{airPollution[0]}</span>
             </p>
             <p>
-                미세먼지 ? {airPollution[0]} <AirDesc /> 초미세먼지 ?{' '}
-                {airPollution[1]} <AirDesc1 />
+                {' '}
+                초미세먼지 : <AirDesc1 />
+                <span className='air-pol'>{airPollution[1]}</span>
             </p>
         </div>
     );
