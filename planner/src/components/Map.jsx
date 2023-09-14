@@ -35,7 +35,8 @@ function Map() {
         let curMarker = new kakao.maps.Marker({
             position: map.getCenter(),
         });
-        let imageSrc = '../images/running.svg',
+        let imageSrc =
+                'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
             imageSize = new kakao.maps.Size(28, 32);
         // imageOption = { offset: new kakao.maps.Point(27, 69) }
         let markerImage = new kakao.maps.MarkerImage(
@@ -87,14 +88,32 @@ function Map() {
                 console.log('Status:', this.status);
                 console.log('Headers:', this.getAllResponseHeaders());
                 console.log('Body:', this.responseText);
+                // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+                // var linePath = [
+                //     new kakao.maps.LatLng(33.452344169439975, 126.56878163224233),
+                //     new kakao.maps.LatLng(33.452739313807456, 126.5709308145358),
+                //     new kakao.maps.LatLng(33.45178067090639, 126.5726886938753)
+                // ];
+
+                // // 지도에 표시할 선을 생성합니다
+                // var polyline = new kakao.maps.Polyline({
+                //     path: linePath, // 선을 구성하는 좌표배열 입니다
+                //     strokeWeight: 5, // 선의 두께 입니다
+                //     strokeColor: '#FFAE00', // 선의 색깔입니다
+                //     strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                //     strokeStyle: 'solid' // 선의 스타일입니다
+                // });
+
+                // // 지도에 선을 표시합니다
+                // polyline.setMap(map);
             }
         };
-
         const body = `{"coordinates":[[${currentLocation[1]},${currentLocation[0]}],[${targetLocation[1]},${targetLocation[0]}]]}`;
-        console.log(body);
+
         request.send(body);
     };
 
+    const drawLine = () => {};
     useEffect(() => {
         mapMaker();
     }, [currentLocation]);
@@ -102,6 +121,9 @@ function Map() {
     useEffect(() => {
         console.log(targetLocation);
     }, [targetLocation]);
+    useEffect(() => {
+        drawLine();
+    }, []);
 
     return (
         <div id='map-layer'>
