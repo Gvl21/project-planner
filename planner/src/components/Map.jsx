@@ -3,6 +3,8 @@ import { StateContext } from '../App';
 import './Map.css';
 
 const { kakao } = window;
+const API_KEY_AUTHERIZATION =
+    '5b3ce3597851110001cf6248d734b8609a6b4b21992bb122f99e9996';
 
 function Map() {
     const currentLocation = useContext(StateContext);
@@ -29,13 +31,24 @@ function Map() {
         if (!map) {
             return;
         }
-        let marker = new kakao.maps.Marker({
-            position: map.getCenter(),
-        });
+
         let curMarker = new kakao.maps.Marker({
             position: map.getCenter(),
         });
+        let imageSrc = '../images/running.svg',
+            imageSize = new kakao.maps.Size(28, 32);
+        // imageOption = { offset: new kakao.maps.Point(27, 69) }
+        let markerImage = new kakao.maps.MarkerImage(
+            imageSrc,
+            imageSize
+            // imageOption
+        );
+        let marker = new kakao.maps.Marker({
+            position: map.getCenter(),
+            image: markerImage,
+        });
         curMarker.setMap(map);
+
         let checking = () => {
             marker.setMap(map);
             setChecked(true);
@@ -53,6 +66,7 @@ function Map() {
             setTargetLocation([tempLat, tempLng]);
         });
     };
+
     const routeHandler = () => {
         let request = new XMLHttpRequest();
 
@@ -66,10 +80,7 @@ function Map() {
             'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8'
         );
         request.setRequestHeader('Content-Type', 'application/json');
-        request.setRequestHeader(
-            'Authorization',
-            '5b3ce3597851110001cf6248d734b8609a6b4b21992bb122f99e9996'
-        );
+        request.setRequestHeader('Authorization', API_KEY_AUTHERIZATION);
 
         request.onreadystatechange = function () {
             if (this.readyState === 4) {
