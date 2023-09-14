@@ -21,6 +21,7 @@ function Map() {
                 level: 5,
             };
         map = new kakao.maps.Map(container, options);
+
         getMarker();
     };
 
@@ -28,11 +29,13 @@ function Map() {
         if (!map) {
             return;
         }
-
         let marker = new kakao.maps.Marker({
             position: map.getCenter(),
         });
-
+        let curMarker = new kakao.maps.Marker({
+            position: map.getCenter(),
+        });
+        curMarker.setMap(map);
         let checking = () => {
             marker.setMap(map);
             setChecked(true);
