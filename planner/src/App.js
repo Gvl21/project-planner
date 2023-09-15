@@ -20,7 +20,6 @@ function App() {
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(geoOk, geoError);
-        console.log(currentLocation);
     }, [loading]);
 
     return (
