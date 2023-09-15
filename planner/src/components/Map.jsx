@@ -145,10 +145,10 @@ function Map() {
                 console.log('Status:', this.status);
                 console.log('Headers:', this.getAllResponseHeaders());
                 // console.log('Body:', this.responseText);
-                const encodedRoute = JSON.parse(this.responseText).routes[0]
+                const decodedRoute = JSON.parse(this.responseText).routes[0]
                     .geometry;
-                console.log(encodedRoute);
-                console.log(encodedRoute.routes[0].geometry);
+                console.log(decodedRoute);
+
                 // console.log(
                 //     decoding(
                 //         encodedRoute.geometry
