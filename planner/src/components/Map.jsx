@@ -9,9 +9,9 @@ const API_KEY_AUTHERIZATION =
 function Map() {
     const currentLocation = useContext(StateContext);
     const [targetLocation, setTargetLocation] = useState(null);
-    const [checked, setChecked] = useState(false);
     const [marked, setMarked] = useState(false);
     const [routes, setRoutes] = useState(null);
+    const [checked, setChecked] = useState(false);
     const [checkedTarget, setCT] = useState({});
 
     let map;
@@ -53,7 +53,6 @@ function Map() {
             return;
         }
         if (checked && targetLocation) {
-            console.log('타겟 재생성');
             marker.setMap(map);
             marker.setPosition(checkedTarget);
         }
@@ -67,7 +66,6 @@ function Map() {
 
         kakao.maps.event.addListener(map, 'click', (mouseEvent) => {
             const latlng = mouseEvent.latLng;
-            console.log(latlng);
             marking();
             marker.setPosition(latlng);
             setCT(marker.getPosition()); // LatLng 타입 데이터 리턴
@@ -128,11 +126,9 @@ function Map() {
                 if (includeElevation) location.push(ele / 100);
                 points.push(location);
             } catch (e) {
-                console.log(e);
                 console.log('경로를 가져오지 못했습니다.');
             }
         }
-        console.log('디코딩 완료');
         setChecked(true);
         return points;
     };
@@ -157,7 +153,6 @@ function Map() {
     // };
 
     async function newHandler() {
-        console.log('newHandler 함수 호출 시작');
         const url =
             'https://api.openrouteservice.org/v2/directions/foot-walking/json';
 
@@ -170,8 +165,6 @@ function Map() {
             },
             body: `{"coordinates":[[${currentLocation[1]},${currentLocation[0]}],[${targetLocation[1]},${targetLocation[0]}]]}`,
         });
-        // console.log(response.json());
-        console.log('데이터를 가져왔습니다');
         const jsonData = await response.json();
 
         return jsonData;
@@ -192,23 +185,10 @@ function Map() {
             const [tempLocation0, tempLocation1] = e;
             return new kakao.maps.LatLng(tempLocation0, tempLocation1);
         });
-        console.log('linepath', linePath);
         setRoutes(linePath);
     }
 
-    // const clickHandler = () => {
-    //     routeHandler().then(() => {
-    //         console.log('클릭');
-    //         drawLine();
-    //         console.log(routes);
-    //         setRoutes(routes);
-    //         console.log('끝 ');
-    //     });
-    // };
     const drawLine = () => {
-        // console.log(routes);
-
-        console.log('drawLine 함수 호출');
         // 지도에 표시할 선을 생성합니다
 
         var polyline = new kakao.maps.Polyline({
@@ -219,11 +199,8 @@ function Map() {
             strokeStyle: 'solid', // 선의 스타일입니다
         });
 
-        console.log('폴리라인 ', polyline);
         // 지도에 선을 표시합니
         polyline.setMap(map);
-
-        console.log('그리기 완료 ');
     };
 
     useEffect(() => {
