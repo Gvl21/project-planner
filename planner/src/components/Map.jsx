@@ -36,7 +36,7 @@ function Map() {
         if (!map) {
             return;
         }
-        if (marked) setMarked(false);
+
         let imageSrc =
                 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
             imageSize = new kakao.maps.Size(28, 32);
@@ -64,9 +64,9 @@ function Map() {
 
         kakao.maps.event.addListener(map, 'click', (mouseEvent) => {
             const latlng = mouseEvent.latLng;
-            if (!marked) {
-                marking();
-            }
+
+            marking();
+
             marker.setPosition(latlng);
 
             let tempLat = latlng.getLat();
@@ -130,6 +130,7 @@ function Map() {
                 console.log('경로를 가져오지 못했습니다.');
             }
         }
+        console.log('디코딩 완료');
         return points;
     };
     // const mockUpHandler = () => {
@@ -153,6 +154,7 @@ function Map() {
     // };
 
     async function newHandler() {
+        console.log('newHandler 함수 호출 시작');
         const url =
             'https://api.openrouteservice.org/v2/directions/foot-walking/json';
 
@@ -166,91 +168,77 @@ function Map() {
             body: `{"coordinates":[[${currentLocation[1]},${currentLocation[0]}],[${targetLocation[1]},${targetLocation[0]}]]}`,
         });
         // console.log(response.json());
-        const jsonData = response.json();
+        console.log('데이터를 가져왔습니다');
+        const jsonData = await response.json();
 
         return jsonData;
     }
 
-    // const routeHandler = () => {
-    //     let request = new XMLHttpRequest();
+    async function routeHandler() {
+        if (!targetLocation) {
+            return;
+        }
+        const routeData = await newHandler();
 
-    //     request.open(
-    //         'POST',
-    //         'https://api.openrouteservice.org/v2/directions/foot-walking/json'
-    //     );
+        const encodedRoute = routeData.routes[0].geometry;
 
-    //     request.setRequestHeader(
-    //         'Accept',
-    //         'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8'
-    //     );
-    //     request.setRequestHeader('Content-Type', 'application/json');
-    //     request.setRequestHeader('Authorization', API_KEY_AUTHERIZATION);
+        const decodedRoute = decoding(encodedRoute);
 
-    //     request.onreadystatechange = function () {
-    //         if (this.readyState === 4) {
-    //             console.log('Status:', this.status);
-    //             console.log('Headers:', this.getAllResponseHeaders());
-    //             // console.log('Body:', this.responseText);
-    //             const encodedRoute = JSON.parse(this.responseText).routes[0]
-    //                 .geometry;
-    //             // console.log(decodedRoute);;
+        // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+        var linePath = decodedRoute.map((e) => {
+            const [tempLocation0, tempLocation1] = e;
+            return new kakao.maps.LatLng(tempLocation0, tempLocation1);
+        });
+        console.log('linepath', linePath);
+        setRoutes(linePath);
+    }
 
-    //             const decodedRoute = decoding(encodedRoute);
-
-    //             // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
-    //             var linePath = decodedRoute.map((e) => {
-    //                 const [tempLocation0, tempLocation1] = e;
-    //                 return new kakao.maps.LatLng(tempLocation0, tempLocation1);
-    //             });
-    //             setRoutes(linePath);
-    //             setLoaded(true);
-    //         }
-    //     };
-
-    //     const body = `{"coordinates":[[${currentLocation[1]},${currentLocation[0]}],[${targetLocation[1]},${targetLocation[0]}]]}`;
-
-    //     request.send(body);
+    // const clickHandler = () => {
+    //     routeHandler().then(() => {
+    //         console.log('클릭');
+    //         drawLine();
+    //         console.log(routes);
+    //         setRoutes(routes);
+    //         console.log('끝 ');
+    //     });
     // };
-
-    const drawLine = (e) => {
+    const drawLine = () => {
         // console.log(routes);
-        if (!loaded) return;
 
-        console.log('준비상태', loaded);
-        console.log('e-', e);
+        console.log('drawLine 함수 호출');
         // 지도에 표시할 선을 생성합니다
 
         var polyline = new kakao.maps.Polyline({
-            path: e, // 선을 구성하는 좌표배열 입니다
+            path: routes, // 선을 구성하는 좌표배열 입니다
             strokeWeight: 5, // 선의 두께 입니다
             strokeColor: '#FFAE00', // 선의 색깔입니다
             strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
             strokeStyle: 'solid', // 선의 스타일입니다
         });
 
-        console.log('폴리라인', polyline);
+        console.log('폴리라인 ', polyline);
         // 지도에 선을 표시합니
         polyline.setMap(map);
 
-        console.log('done');
+        console.log('그리기 완료 ');
     };
 
     useEffect(() => {
         mapMaker();
-    }, [currentLocation]);
+    }, [currentLocation, routes]);
 
     useEffect(() => {
         console.log(targetLocation);
     }, [targetLocation]);
-    // useEffect(() => {
-    //     drawLine(routes);
-    // }, [routes]);
+    useEffect(() => {
+        drawLine();
+    }, [routes]);
 
     return (
         <div id='map-layer'>
             <h3>현재 위치</h3>
             <div id='map'></div>
-            <button onClick={newHandler}>여기로 가보기</button>
+            <button onClick={routeHandler}>여기로 가보기</button>
         </div>
     );
 }
