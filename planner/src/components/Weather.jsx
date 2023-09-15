@@ -19,7 +19,6 @@ function Weather() {
         setCity(response.name);
         setCondition(response.weather[0].icon);
         setAltCondition(response.weather[0].description);
-        console.log(response);
     };
     const getAirPollution = async (lat, lng) => {
         const url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lng}&appid=${API_KEY_WEATHER}&units=metric`;

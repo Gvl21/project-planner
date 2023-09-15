@@ -68,6 +68,63 @@ function Map() {
         });
     };
 
+    /**
+   * Decode an x,y or x,y,z encoded polyline
+//    * @param {*} encodedPolyline
+//    * @param {Boolean} includeElevation - true for x,y,z polyline
+//    * @returns {Array} of coordinates
+   */
+    const decoding = (encodedPolyline, includeElevation) => {
+        // array that holds the points
+        let points = [];
+        let index = 0;
+        const len = encodedPolyline.length;
+        let lat = 0;
+        let lng = 0;
+        let ele = 0;
+        while (index < len) {
+            let b;
+            let shift = 0;
+            let result = 0;
+            do {
+                b = encodedPolyline.charAt(index++).charCodeAt(0) - 63; // finds ascii
+                // and subtract it by 63
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+
+            lat += (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
+            shift = 0;
+            result = 0;
+            do {
+                b = encodedPolyline.charAt(index++).charCodeAt(0) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            lng += (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
+
+            if (includeElevation) {
+                shift = 0;
+                result = 0;
+                do {
+                    b = encodedPolyline.charAt(index++).charCodeAt(0) - 63;
+                    result |= (b & 0x1f) << shift;
+                    shift += 5;
+                } while (b >= 0x20);
+                ele += (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
+            }
+            try {
+                let location = [lat / 1e5, lng / 1e5];
+                if (includeElevation) location.push(ele / 100);
+                points.push(location);
+            } catch (e) {
+                console.log(e);
+                console.log('경로를 가져오지 못했습니다.');
+            }
+        }
+        return points;
+    };
+
     const routeHandler = () => {
         let request = new XMLHttpRequest();
 
@@ -87,7 +144,18 @@ function Map() {
             if (this.readyState === 4) {
                 console.log('Status:', this.status);
                 console.log('Headers:', this.getAllResponseHeaders());
-                console.log('Body:', this.responseText);
+                // console.log('Body:', this.responseText);
+                const encodedRoute = JSON.parse(this.responseText).routes[0]
+                    .geometry;
+                console.log(encodedRoute);
+                console.log(encodedRoute.routes[0].geometry);
+                // console.log(
+                //     decoding(
+                //         encodedRoute.geometry
+                //         // 'yzouEmn`sW_BwABIr@qAXi@xAZdAT|A?xApJEJzDnCnDhCu@hBu@~CLB'
+                //     )
+                // );
+
                 // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
                 // var linePath = [
                 //     new kakao.maps.LatLng(33.452344169439975, 126.56878163224233),
