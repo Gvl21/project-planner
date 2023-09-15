@@ -12,7 +12,7 @@ function Map() {
     const [checked, setChecked] = useState(false);
     const [marked, setMarked] = useState(false);
     const [routes, setRoutes] = useState(null);
-    const [loaded, setLoaded] = useState(false);
+    const [checkedTarget, setCT] = useState({});
 
     let map;
 
@@ -33,10 +33,6 @@ function Map() {
     //?
 
     const getMarker = () => {
-        if (!map) {
-            return;
-        }
-
         let imageSrc =
                 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
             imageSize = new kakao.maps.Size(28, 32);
@@ -53,22 +49,28 @@ function Map() {
         let curMarker = new kakao.maps.Marker({
             position: map.getCenter(),
         });
+        if (!map) {
+            return;
+        }
+        if (checked && targetLocation) {
+            console.log('타겟 재생성');
+            marker.setMap(map);
+            marker.setPosition(checkedTarget);
+        }
 
         let marking = () => {
             marker.setMap(map);
             setMarked(true);
         };
-
         //
         curMarker.setMap(map);
 
         kakao.maps.event.addListener(map, 'click', (mouseEvent) => {
             const latlng = mouseEvent.latLng;
-
+            console.log(latlng);
             marking();
-
             marker.setPosition(latlng);
-
+            setCT(marker.getPosition()); // LatLng 타입 데이터 리턴
             let tempLat = latlng.getLat();
             let tempLng = latlng.getLng();
             setTargetLocation([tempLat, tempLng]);
@@ -131,6 +133,7 @@ function Map() {
             }
         }
         console.log('디코딩 완료');
+        setChecked(true);
         return points;
     };
     // const mockUpHandler = () => {
@@ -227,9 +230,7 @@ function Map() {
         mapMaker();
     }, [currentLocation, routes]);
 
-    useEffect(() => {
-        console.log(targetLocation);
-    }, [targetLocation]);
+    useEffect(() => {}, []);
     useEffect(() => {
         drawLine();
     }, [routes]);
