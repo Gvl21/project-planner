@@ -1,38 +1,31 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { DispatchContext } from '../App';
-
-function formatDate(date) {
-    const year = String(date.getFullYear()).slice(-2);
-    const month = String(date.getMonth() + 1).padStart(2, 0);
-    const day = String(date.getDate()).padStart(2, 0);
-
-    return `${year}년 ${month}월 ${day}일`;
-}
+import DiaryList from './DiaryList';
+import { formatDate } from './util';
 
 function CalendarDiary() {
     const [date, setDate] = useState(new Date());
-    const [diary, setDiary] = useState({});
-    const [newText, setNewText] = useState('');
+    // const [diary, setDiary] = useState({});
+    // const [newText, setNewText] = useState('');
 
     const handleDateChange = (date) => {
         setDate(date);
     };
 
-    const handleDiaryChange = (e) => {
-        setNewText(e.target.value);
-    };
-    const handleDiarySubmit = (e) => {
-        e.preventDefault();
-        const formattedDate = formatDate(date);
-        const updatedDiary = {
-            ...diary,
-            [formattedDate]: [...(diary[formattedDate] || []), newText],
-        };
-        setDiary(updatedDiary);
-        setNewText('');
-    };
+    // const handleDiaryChange = (e) => {
+    //     setNewText(e.target.value);
+    // };
+    // const handleDiarySubmit = (e) => {
+    //     e.preventDefault();
+    //     const formattedDate = formatDate(date);
+    //     const updatedDiary = {
+    //         ...diary,
+    //         [formattedDate]: [...(diary[formattedDate] || []), newText],
+    //     };
+    //     setDiary(updatedDiary);
+    //     setNewText('');
+    // };
 
     return (
         <div>
@@ -44,7 +37,8 @@ function CalendarDiary() {
                     date.toLocaleString('en', { day: 'numeric' })
                 }
             />
-            <div>
+            <DiaryList date={date} />
+            {/* <div>
                 <h2>{formatDate(date)}</h2>
                 <form onSubmit={handleDiarySubmit}>
                     <textarea
@@ -66,7 +60,7 @@ function CalendarDiary() {
                             <li key={idx}>{e}</li>
                         ))}
                 </ul>
-            </div>
+            </div> */}
         </div>
     );
 }

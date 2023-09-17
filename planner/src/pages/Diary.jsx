@@ -1,5 +1,5 @@
 import React from 'react';
-import CalendarDiary from '../components/CalenderDiary';
+import CalendarDiary from '../components/CalendarDiary';
 
 function Diary() {
     return (
