@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DiaryContext, StateContext } from '../App';
 import { formatDate } from '../util';
+import './MiniDiary.css';
+
 function MiniDiary() {
     const {
         diary,
@@ -14,6 +16,11 @@ function MiniDiary() {
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const handleDiaryChange = (e) => {
         setNewText(e.target.value);
+    };
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            handleDiarySubmit();
+        }
     };
     useEffect(() => {
         const storedData = localStorage.getItem('diaryData');
@@ -35,26 +42,34 @@ function MiniDiary() {
         return <div>로딩 중입니다.</div>;
     } else {
         return (
-            <div>
-                <div>
-                    <p>오늘의 메모</p>
+            <div id='mini-diary'>
+                <div id='submit-part'>
+                    <h2>오늘의 메모</h2>
                     <input
                         placeholder='오늘의 메모'
                         value={newText}
                         onChange={handleDiaryChange}
+                        onKeyDown={handleEnter}
                     />
-                    <button type='submit' onClick={handleDiarySubmit}>
+                    <button
+                        className='btnMini btnPurple'
+                        type='submit'
+                        onClick={handleDiarySubmit}
+                    >
                         저장
                     </button>
                 </div>
-                <div>
+                <div id='diary-part'>
                     <h2>나의 하루</h2>
                     <ul>
                         {diary[formatDate(date)] &&
                             diary[formatDate(date)].map((e, idx) => (
                                 <li key={idx}>
                                     {e}
-                                    <button onClick={() => handleDelete(idx)}>
+                                    <button
+                                        className='btnMini btnLightBlue'
+                                        onClick={() => handleDelete(idx)}
+                                    >
                                         삭제
                                     </button>
                                 </li>

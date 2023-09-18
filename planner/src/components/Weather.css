@@ -13,12 +13,17 @@
     font-size: 0.9rem;
 }
 
+#condition img {
+    width: 80px;
+    height: 80px;
+}
+
 #weather-header {
     font-size: 3rem;
     font-weight: bolder;
     margin: 2px;
     position: absolute;
-    top: 10%;
+    top: 170px;
     left: 50vw;
     text-align: center;
     display: flex;

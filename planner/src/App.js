@@ -50,7 +50,7 @@ function App() {
     };
 
     const handleDiarySubmit = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         const formattedDate = formatDate(date);
 
         dispatch({ type: 'ADD', date: formattedDate, text: newText });
