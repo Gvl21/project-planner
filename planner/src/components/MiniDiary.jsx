@@ -22,6 +22,29 @@ function MiniDiary() {
             handleDiarySubmit(e);
         }
     };
+
+    const MiniList = () => {
+        return (
+            <div id='diary-part'>
+                <h2>나의 하루</h2>
+                <ul>
+                    {diary[formatDate(date)] &&
+                        diary[formatDate(date)].slice(0, 7).map((e, idx) => (
+                            <li key={idx}>
+                                {e}
+                                <button
+                                    className='btnMini btnLightBlue'
+                                    onClick={() => handleDelete(idx)}
+                                >
+                                    삭제
+                                </button>
+                            </li>
+                        ))}
+                </ul>
+            </div>
+        );
+    };
+
     useEffect(() => {
         const storedData = localStorage.getItem('diaryData');
         if (!storedData) {
@@ -59,7 +82,8 @@ function MiniDiary() {
                         저장
                     </button>
                 </form>
-                <div id='diary-part'>
+                <MiniList />
+                {/* <div id='diary-part'>
                     <h2>나의 하루</h2>
                     <ul>
                         {diary[formatDate(date)] &&
@@ -75,7 +99,7 @@ function MiniDiary() {
                                 </li>
                             ))}
                     </ul>
-                </div>
+                </div> */}
             </div>
         );
     }

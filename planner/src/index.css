@@ -28,7 +28,31 @@
 .btnPurple {
     background: #a74982;
 }
-.btnFloat {
-    background: none;
-    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+
+button:hover {
+    font-weight: 600;
+}
+
+#navi-main {
+    position: absolute;
+    display: flex;
+    height: 80px;
+    width: 180px;
+    font-size: 1.8rem;
+    align-items: center;
+    justify-content: center;
+    right: 50px;
+    bottom: 150px;
+}
+
+#navi-diary {
+    position: absolute;
+    display: flex;
+    height: 80px;
+    width: 180px;
+    font-size: 1.8rem;
+    align-items: center;
+    justify-content: center;
+    right: 50px;
+    bottom: 150px;
 }

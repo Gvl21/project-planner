@@ -5,12 +5,14 @@ import Weather from '../components/Weather';
 import MiniDiary from '../components/MiniDiary';
 import '../components/MiniDiary.css';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 function Main() {
     const navigate = useNavigate();
     const goDiary = () => {
         navigate('/diary');
     };
+
     return (
         <div>
             <Clock />
@@ -19,7 +21,15 @@ function Main() {
                 <Map />
                 <MiniDiary />
             </div>
-            {/* <button onClick={goDiary}/> */}
+            <button
+                id='navi-main'
+                className='btnMini btnOrange'
+                onClick={goDiary}
+            >
+                {' '}
+                다이어리
+                <br /> 페이지{'>>'}{' '}
+            </button>
         </div>
     );
 }

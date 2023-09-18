@@ -4,6 +4,13 @@ import { Route, Routes } from 'react-router-dom';
 import Main from './pages/Main';
 import Diary from './pages/Diary';
 import { formatDate } from './util';
+import styled from 'styled-components';
+
+import img1 from './images/bg_1.jpg';
+
+const backgroundArr = [img1];
+const randomIndex = Math.floor(Math.random() * backgroundArr.length);
+const backgroundImg = backgroundArr[randomIndex];
 
 export const StateContext = React.createContext();
 export const DiaryContext = React.createContext();
@@ -37,6 +44,19 @@ function App() {
     const [currentLocation, setCurrentLocation] = useState(null);
     const [loading, setLoading] = useState(true);
     const [date, setDate] = useState(new Date());
+
+    const Container = styled.div`
+        background-image: url(${backgroundImg});
+        position: absolute;
+        margin: 0px;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1;
+    `;
 
     const handleDateChange = (date) => {
         setDate(date);
@@ -105,6 +125,7 @@ function App() {
                         <Route path='/diary' element={<Diary />} />
                     </Routes>
                 </div>
+                <Container></Container>
             </DiaryContext.Provider>
         </StateContext.Provider>
     );

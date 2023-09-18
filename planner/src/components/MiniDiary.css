@@ -1,10 +1,12 @@
 #main-layer {
     display: grid;
     grid-template-columns: 2.5fr 1fr;
+    max-height: 605px;
 }
 
 #mini-diary {
     text-align: left;
+    max-height: 605px;
 }
 
 #submit-part input {
@@ -13,10 +15,12 @@
 }
 #submit-part h2 {
     font-size: 1.8rem;
+    margin-top: 0;
 }
 
 #diary-part {
     margin-top: 50px;
+    max-height: 370px;
 }
 
 #diary-part ul {
