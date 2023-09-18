@@ -5,7 +5,7 @@ import DiaryList from './DiaryList';
 import { StateContext } from '../App';
 
 function CalendarDiary() {
-    const { date, setDate, handleDateChange } = useContext(StateContext);
+    const { date, handleDateChange } = useContext(StateContext);
     // const [date, setDate] = useState(new Date());
 
     // const handleDateChange = (date) => {
@@ -22,6 +22,7 @@ function CalendarDiary() {
                     date.toLocaleString('en', { day: 'numeric' })
                 }
             />
+            <DiaryList />
         </div>
     );
 }

@@ -1,36 +1,44 @@
 import React, { useState, useReducer, useEffect, useContext } from 'react';
-import { formatDate } from './util';
-import { StateContext } from '../App';
+import { formatDate } from '../util';
+import { DiaryContext, StateContext } from '../App';
 
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'INIT':
-            return action.data;
-        case 'ADD':
-            const newState = {
-                ...state,
-                [action.date]: [...(state[action.date] || []), action.text],
-            };
-            localStorage.setItem('diaryData', JSON.stringify(newState));
-            return newState;
+// const reducer = (state, action) => {
+//     switch (action.type) {
+//         case 'INIT':
+//             return action.data;
+//         case 'ADD':
+//             const newState = {
+//                 ...state,
+//                 [action.date]: [...(state[action.date] || []), action.text],
+//             };
+//             localStorage.setItem('diaryData', JSON.stringify(newState));
+//             return newState;
 
-        case 'DELETE': {
-            const { date, index } = action;
-            const updatedDiary = state[date].filter((_, idx) => idx !== index);
-            const newState = { ...state, [date]: updatedDiary };
+//         case 'DELETE': {
+//             const { date, index } = action;
+//             const updatedDiary = state[date].filter((_, idx) => idx !== index);
+//             const newState = { ...state, [date]: updatedDiary };
 
-            return newState;
-        }
-        default:
-            return state;
-    }
-};
+//             return newState;
+//         }
+//         default:
+//             return state;
+//     }
+// };
 
 function DiaryList() {
-    const [diary, dispatch] = useReducer(reducer, {});
-    const [newText, setNewText] = useState('');
+    // const [diary, dispatch] = useReducer(reducer, {});
+    // const [newText, setNewText] = useState('');
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const { date } = useContext(StateContext);
+    const {
+        diary,
+        dispatch,
+        newText,
+        handleDelete,
+        handleDiaryChange,
+        handleDiarySubmit,
+    } = useContext(DiaryContext);
 
     // useEffect(() => {
     //     localStorage.setItem('diaryData', JSON.stringify(diary));
@@ -51,24 +59,24 @@ function DiaryList() {
         setIsDataLoaded(true);
     }, []);
 
-    const handleDiaryChange = (e) => {
-        setNewText(e.target.value);
-    };
+    // const handleDiaryChange = (e) => {
+    //     setNewText(e.target.value);
+    // };
 
-    const handleDiarySubmit = (e) => {
-        e.preventDefault();
-        const formattedDate = formatDate(date);
+    // const handleDiarySubmit = (e) => {
+    //     e.preventDefault();
+    //     const formattedDate = formatDate(date);
 
-        dispatch({ type: 'ADD', date: formattedDate, text: newText });
+    //     dispatch({ type: 'ADD', date: formattedDate, text: newText });
 
-        setNewText('');
-    };
+    //     setNewText('');
+    // };
 
-    const handleDelete = (index) => {
-        const formattedDate = formatDate(date);
+    // const handleDelete = (index) => {
+    //     const formattedDate = formatDate(date);
 
-        dispatch({ type: 'DELETE', date: formattedDate, index });
-    };
+    //     dispatch({ type: 'DELETE', date: formattedDate, index });
+    // };
 
     if (!isDataLoaded) {
         return <div>로딩 중입니다.</div>;
