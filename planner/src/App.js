@@ -9,6 +9,11 @@ export const StateContext = React.createContext();
 function App() {
     const [currentLocation, setCurrentLocation] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [date, setDate] = useState(new Date());
+
+    const handleDateChange = (date) => {
+        setDate(date);
+    };
 
     const geoOk = (position) => {
         const lat = position.coords.latitude;
@@ -25,7 +30,9 @@ function App() {
     }, [loading]);
 
     return (
-        <StateContext.Provider value={currentLocation}>
+        <StateContext.Provider
+            value={{ currentLocation, date, setDate, handleDateChange }}
+        >
             <div className='App'>
                 <Routes>
                     <Route path='/' element={<Main />} />

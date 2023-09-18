@@ -7,7 +7,7 @@ const API_KEY_AUTHERIZATION =
     '5b3ce3597851110001cf6248d734b8609a6b4b21992bb122f99e9996';
 
 function Map() {
-    const currentLocation = useContext(StateContext);
+    const { currentLocation } = useContext(StateContext);
     const [targetLocation, setTargetLocation] = useState(null);
     const [marked, setMarked] = useState(false);
     const [routes, setRoutes] = useState(null);

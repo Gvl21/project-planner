@@ -1,5 +1,6 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect, useContext } from 'react';
 import { formatDate } from './util';
+import { StateContext } from '../App';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -25,10 +26,11 @@ const reducer = (state, action) => {
     }
 };
 
-function DiaryList({ date }) {
+function DiaryList() {
     const [diary, dispatch] = useReducer(reducer, {});
     const [newText, setNewText] = useState('');
     const [isDataLoaded, setIsDataLoaded] = useState(false);
+    const { date } = useContext(StateContext);
 
     // useEffect(() => {
     //     localStorage.setItem('diaryData', JSON.stringify(diary));

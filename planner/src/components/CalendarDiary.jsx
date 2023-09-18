@@ -2,13 +2,15 @@ import React, { useContext, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import DiaryList from './DiaryList';
+import { StateContext } from '../App';
 
 function CalendarDiary() {
-    const [date, setDate] = useState(new Date());
+    const { date, setDate, handleDateChange } = useContext(StateContext);
+    // const [date, setDate] = useState(new Date());
 
-    const handleDateChange = (date) => {
-        setDate(date);
-    };
+    // const handleDateChange = (date) => {
+    //     setDate(date);
+    // };
 
     return (
         <div>
@@ -20,7 +22,6 @@ function CalendarDiary() {
                     date.toLocaleString('en', { day: 'numeric' })
                 }
             />
-            <DiaryList date={date} />
         </div>
     );
 }

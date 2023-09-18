@@ -5,7 +5,7 @@ import './Weather.css';
 const API_KEY_WEATHER = '454424e4d734ed439e4de2476b24c478';
 
 function Weather() {
-    const currentLocation = useContext(StateContext);
+    const { currentLocation } = useContext(StateContext);
     const [temperature, setTemperature] = useState(0);
     const [condition, setCondition] = useState();
     const [altCondition, setAltCondition] = useState();
