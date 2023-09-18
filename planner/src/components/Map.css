@@ -14,3 +14,16 @@
 #map-layer h3 {
     margin-bottom: 0;
 }
+
+#router-button {
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+    border-radius: 10%;
+    border: none;
+    font-weight: 400;
+    color: white;
+}
+#router-button:hover {
+    font-weight: 600;
+}

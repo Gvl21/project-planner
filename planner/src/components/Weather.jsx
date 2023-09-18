@@ -72,19 +72,21 @@ function Weather() {
                     />
                 </p>
             </div>
-            <p>
-                {city}의 기온 : {temperature}
-            </p>
+            <div id='weather-side'>
+                <p>
+                    {city}의 기온 : {temperature}
+                </p>
 
-            <p>
-                미세먼지 : <AirDesc />
-                <span className='air-pol'>{airPollution[0]}</span>
-            </p>
-            <p>
-                {' '}
-                초미세먼지 : <AirDesc1 />
-                <span className='air-pol'>{airPollution[1]}</span>
-            </p>
+                <p>
+                    미세먼지 : <AirDesc />
+                    <span className='air-pol'>{airPollution[0]}</span>
+                </p>
+                <p>
+                    {' '}
+                    초미세먼지 : <AirDesc1 />
+                    <span className='air-pol'>{airPollution[1]}</span>
+                </p>
+            </div>
         </div>
     );
 }

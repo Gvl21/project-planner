@@ -228,7 +228,13 @@ function Map() {
         <div id='map-layer'>
             <h3>현재 위치</h3>
             <div id='map'></div>
-            <button onClick={routeHandler}>여기로 가보기</button>
+            <button
+                id='router-button'
+                className='btnBlueGreen'
+                onClick={routeHandler}
+            >
+                여기로 가보기
+            </button>
 
             <>
                 {distance > 0 ? (

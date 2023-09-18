@@ -6,6 +6,7 @@ import MiniDiary from '../components/MiniDiary';
 import '../components/MiniDiary.css';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import FakeHeader from '../components/FakeHeader';
 
 function Main() {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ function Main() {
 
     return (
         <div>
+            <FakeHeader />
             <Clock />
             <Weather />
             <div id='main-layer'>

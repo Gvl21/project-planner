@@ -1,0 +1,10 @@
+#fake-header {
+    position: absolute;
+    height: 190px;
+    width: 100%;
+    background-color: orange;
+    opacity: 1;
+    top: 8%;
+    left: 0;
+    z-index: -1;
+}

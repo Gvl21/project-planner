@@ -6,7 +6,7 @@ import Diary from './pages/Diary';
 import { formatDate } from './util';
 import styled from 'styled-components';
 
-import img1 from './images/bg_1.jpg';
+import img1 from './images/bg_2.jpg';
 
 const backgroundArr = [img1];
 const randomIndex = Math.floor(Math.random() * backgroundArr.length);
@@ -49,13 +49,14 @@ function App() {
         background-image: url(${backgroundImg});
         position: absolute;
         margin: 0px;
-        top: 0;
+        top: 8%;
         left: 0;
         width: 100vw;
-        height: 100vh;
+        height: 84vh;
         background-size: cover;
         background-repeat: no-repeat;
         z-index: -1;
+        opacity: 0.7;
     `;
 
     const handleDateChange = (date) => {

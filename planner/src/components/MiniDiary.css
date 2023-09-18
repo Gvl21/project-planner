@@ -1,12 +1,18 @@
 #main-layer {
     display: grid;
-    grid-template-columns: 2.5fr 1fr;
+    grid-template-columns: 2.3fr 1fr;
     max-height: 605px;
 }
 
 #mini-diary {
     text-align: left;
-    max-height: 605px;
+    max-height: 550px;
+    padding-left: 10px;
+    padding-top: 10px;
+    border: 4px rgb(27, 156, 81) solid;
+    border-radius: 5%;
+    background-color: #9ee695;
+    opacity: 0.9;
 }
 
 #submit-part input {

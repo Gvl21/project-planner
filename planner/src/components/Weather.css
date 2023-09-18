@@ -35,3 +35,9 @@
 #weather-header p {
     margin: 0;
 }
+#weather-side {
+    position: relative;
+    font-weight: 500;
+    z-index: 1;
+    font-weight: bold;
+}
