@@ -1,51 +1,53 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import { formatDate } from './util';
 
-// reducer 함수 정의
-const diaryReducer = (state, action) => {
+const reducer = (state, action) => {
     switch (action.type) {
+        case 'INIT':
+            return action.data;
         case 'ADD':
-            return {
+            const newState = {
                 ...state,
                 [action.date]: [...(state[action.date] || []), action.text],
             };
-        case 'LOAD':
-            return action.data;
-        case 'DELETE':
+            localStorage.setItem('diaryData', JSON.stringify(newState));
+            return newState;
+
+        case 'DELETE': {
             const { date, index } = action;
-            const updatedEntries = state[date].filter(
-                (_, idx) => idx !== index
-            );
-            return {
-                ...state,
-                [date]: updatedEntries,
-            };
+            const updatedDiary = state[date].filter((_, idx) => idx !== index);
+            const newState = { ...state, [date]: updatedDiary };
+
+            return newState;
+        }
         default:
             return state;
     }
 };
 
 function DiaryList({ date }) {
-    const [diary, dispatch] = useReducer(diaryReducer, {});
+    const [diary, dispatch] = useReducer(reducer, {});
     const [newText, setNewText] = useState('');
     const [isDataLoaded, setIsDataLoaded] = useState(false);
 
+    // useEffect(() => {
+    //     localStorage.setItem('diaryData', JSON.stringify(diary));
+    // }, [diary]);
     useEffect(() => {
         const storedData = localStorage.getItem('diaryData');
-        if (storedData) {
-            const localData = JSON.parse(storedData);
-            if (localData.length === 0) {
-                setIsDataLoaded(true);
-                return;
-            }
-            dispatch({ type: 'LOAD', data: localData });
+        if (!storedData) {
             setIsDataLoaded(true);
+            return;
         }
-    }, []);
 
-    useEffect(() => {
-        localStorage.setItem('diaryData', JSON.stringify(diary));
-    }, [diary]);
+        const localData = JSON.parse(storedData);
+        if (localData.length === 0) {
+            setIsDataLoaded(true);
+            return;
+        }
+        dispatch({ type: 'INIT', data: localData });
+        setIsDataLoaded(true);
+    }, []);
 
     const handleDiaryChange = (e) => {
         setNewText(e.target.value);
@@ -56,6 +58,7 @@ function DiaryList({ date }) {
         const formattedDate = formatDate(date);
 
         dispatch({ type: 'ADD', date: formattedDate, text: newText });
+
         setNewText('');
     };
 
@@ -75,7 +78,7 @@ function DiaryList({ date }) {
                     <form onSubmit={handleDiarySubmit}>
                         <textarea
                             rows='4'
-                            cols='50'
+                            cols='40'
                             placeholder='나의 하루는?'
                             value={newText}
                             onChange={handleDiaryChange}

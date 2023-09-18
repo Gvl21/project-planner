@@ -13,6 +13,8 @@ function Map() {
     const [routes, setRoutes] = useState(null);
     const [checked, setChecked] = useState(false);
     const [checkedTarget, setCT] = useState({});
+    const [point, setPoint] = useState('');
+    const [distance, setDistance] = useState(0);
 
     let map;
 
@@ -175,6 +177,16 @@ function Map() {
             return;
         }
         const routeData = await newHandler();
+        const arriveAt =
+            routeData.routes[0].segments[0].steps.slice(-1)[0].instruction;
+        const arrivePoint = arriveAt.substring(
+            arriveAt.indexOf('t') + 1,
+            arriveAt.indexOf(',')
+        );
+        const tempDistance = routeData.routes[0].summary.distance;
+
+        setPoint(arrivePoint || '목적지');
+        setDistance(tempDistance);
 
         const encodedRoute = routeData.routes[0].geometry;
 
@@ -217,6 +229,9 @@ function Map() {
             <h3>현재 위치</h3>
             <div id='map'></div>
             <button onClick={routeHandler}>여기로 가보기</button>
+            <h3>
+                {point}까지 {distance}M 입니다
+            </h3>
         </div>
     );
 }
