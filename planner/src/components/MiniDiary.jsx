@@ -19,7 +19,7 @@ function MiniDiary() {
     };
     const handleEnter = (e) => {
         if (e.key === 'Enter') {
-            handleDiarySubmit();
+            handleDiarySubmit(e);
         }
     };
     useEffect(() => {
@@ -43,7 +43,7 @@ function MiniDiary() {
     } else {
         return (
             <div id='mini-diary'>
-                <div id='submit-part'>
+                <form id='submit-part'>
                     <h2>오늘의 메모</h2>
                     <input
                         placeholder='오늘의 메모'
@@ -58,7 +58,7 @@ function MiniDiary() {
                     >
                         저장
                     </button>
-                </div>
+                </form>
                 <div id='diary-part'>
                     <h2>나의 하루</h2>
                     <ul>
