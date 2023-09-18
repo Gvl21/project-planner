@@ -1,6 +1,7 @@
 import React, { useState, useReducer, useEffect, useContext } from 'react';
 import { formatDate } from '../util';
 import { DiaryContext, StateContext } from '../App';
+import './DiaryList.css';
 
 // const reducer = (state, action) => {
 //     switch (action.type) {
@@ -99,12 +100,15 @@ function DiaryList() {
                 </div>
                 <div>
                     <h2>나의 하루</h2>
-                    <ul>
+                    <ul id='diary-layer'>
                         {diary[formatDate(date)] &&
                             diary[formatDate(date)].map((e, idx) => (
-                                <li key={idx}>
+                                <li id='diary-plate' key={idx}>
                                     {e}
-                                    <button onClick={() => handleDelete(idx)}>
+                                    <button
+                                        className='btnOrange btnMini'
+                                        onClick={() => handleDelete(idx)}
+                                    >
                                         삭제
                                     </button>
                                 </li>

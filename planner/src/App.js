@@ -38,26 +38,25 @@ const reducer = (state, action) => {
             return state;
     }
 };
+const Container = styled.div`
+    background-image: url(${backgroundImg});
+    position: absolute;
+    margin: 0px;
+    top: 8%;
+    left: 0;
+    width: 100vw;
+    height: 84vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+    opacity: 0.7;
+`;
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
 function App() {
     const [currentLocation, setCurrentLocation] = useState(null);
     const [loading, setLoading] = useState(true);
     const [date, setDate] = useState(new Date());
-
-    const Container = styled.div`
-        background-image: url(${backgroundImg});
-        position: absolute;
-        margin: 0px;
-        top: 8%;
-        left: 0;
-        width: 100vw;
-        height: 84vh;
-        background-size: cover;
-        background-repeat: no-repeat;
-        z-index: -1;
-        opacity: 0.7;
-    `;
 
     const handleDateChange = (date) => {
         setDate(date);

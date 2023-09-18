@@ -1,3 +1,15 @@
+#calendar-parts {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+#calendar-layer {
+    text-align: center;
+    margin: 30px;
+}
+#diary-list {
+    margin-left: 15px;
+}
+
 .react-calendar {
     width: 500px;
     height: 300px;
