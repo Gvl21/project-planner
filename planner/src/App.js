@@ -9,15 +9,14 @@ import styled from 'styled-components';
 import img1 from './images/bg_1.jpg';
 import img2 from './images/bg_2.jpg';
 import img3 from './images/bg_3.jpg';
-import img4 from './images/bg_4.jpg';
 
-const backgroundArr = [img1, img2, img3, img4];
+const backgroundArr = [img1, img2, img3];
 const randomIndex = Math.floor(Math.random() * backgroundArr.length);
 const backgroundImg = backgroundArr[randomIndex];
 
 export const StateContext = React.createContext();
 export const DiaryContext = React.createContext();
-// 다이어리 관련 리듀서 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+// 다이어리 관련 리듀서 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 const reducer = (state, action) => {
     switch (action.type) {
         case 'INIT':
@@ -52,7 +51,7 @@ const Container = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
     z-index: -1;
-    opacity: 0.7;
+    opacity: 0.4;
 `;
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 

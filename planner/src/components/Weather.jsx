@@ -23,7 +23,7 @@ function Weather() {
         setTemperature(response.main.temp);
         setCity(response.name);
         setCondition(response.weather[0].icon);
-        setAltCondition(response.weather[0].description);
+        setAltCondition(response.weather[0].main);
     };
     const getAirPollution = async (lat, lng) => {
         const url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lng}&appid=${API_KEY_WEATHER}&units=metric`;
@@ -57,6 +57,15 @@ function Weather() {
             return <p>미세먼지가 심해요. 마스크 챙기세요.</p>;
         } else return <p>오늘도 즐거운 산책!</p>;
     };
+    // const Message1 = () => {
+    //     if (altCondition === 'Rain' || altCondition === 'Drizzle') {
+    //         return <p>비오니 우산 챙기세요!</p>;
+    //     } else if (altCondition === 'Thunderstorm') {
+    //         return <p>날씨가 안 좋아요, 천둥번개 조심하세요.</p>;
+    //     } else if (altCondition === 'Snow') {
+    //         return <p>눈이다!</p>;
+    //     } else return <p>테스트!</p>;
+    // };
 
     useEffect(() => {
         if (!currentLocation) return;
@@ -64,6 +73,7 @@ function Weather() {
         const lng = currentLocation[1];
         getWeather(lat, lng);
         getAirPollution(lat, lng);
+        console.log(altCondition);
     }, [currentLocation]);
 
     return (
@@ -72,6 +82,7 @@ function Weather() {
             <Container>
                 <div id='weather-header'>
                     <Message />
+                    {/* <Message1 /> */}
                     <p id='condition'>
                         날씨 :
                         <img

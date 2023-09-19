@@ -219,7 +219,6 @@ function Map() {
         mapMaker();
     }, [currentLocation, routes]);
 
-    useEffect(() => {}, []);
     useEffect(() => {
         drawLine();
     }, [routes]);
