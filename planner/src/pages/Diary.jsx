@@ -11,6 +11,7 @@ function Diary() {
     return (
         <div>
             <CalendarDiary />
+
             <button
                 id='navi-diary'
                 className='btnMini btnOrange'

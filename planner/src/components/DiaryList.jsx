@@ -3,33 +3,7 @@ import { formatDate } from '../util';
 import { DiaryContext, StateContext } from '../App';
 import './DiaryList.css';
 
-// const reducer = (state, action) => {
-//     switch (action.type) {
-//         case 'INIT':
-//             return action.data;
-//         case 'ADD':
-//             const newState = {
-//                 ...state,
-//                 [action.date]: [...(state[action.date] || []), action.text],
-//             };
-//             localStorage.setItem('diaryData', JSON.stringify(newState));
-//             return newState;
-
-//         case 'DELETE': {
-//             const { date, index } = action;
-//             const updatedDiary = state[date].filter((_, idx) => idx !== index);
-//             const newState = { ...state, [date]: updatedDiary };
-
-//             return newState;
-//         }
-//         default:
-//             return state;
-//     }
-// };
-
 function DiaryList() {
-    // const [diary, dispatch] = useReducer(reducer, {});
-    // const [newText, setNewText] = useState('');
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const { date } = useContext(StateContext);
     const {
@@ -41,9 +15,6 @@ function DiaryList() {
         handleDiarySubmit,
     } = useContext(DiaryContext);
 
-    // useEffect(() => {
-    //     localStorage.setItem('diaryData', JSON.stringify(diary));
-    // }, [diary]);
     useEffect(() => {
         const storedData = localStorage.getItem('diaryData');
         if (!storedData) {
@@ -59,25 +30,6 @@ function DiaryList() {
         dispatch({ type: 'INIT', data: localData });
         setIsDataLoaded(true);
     }, []);
-
-    // const handleDiaryChange = (e) => {
-    //     setNewText(e.target.value);
-    // };
-
-    // const handleDiarySubmit = (e) => {
-    //     e.preventDefault();
-    //     const formattedDate = formatDate(date);
-
-    //     dispatch({ type: 'ADD', date: formattedDate, text: newText });
-
-    //     setNewText('');
-    // };
-
-    // const handleDelete = (index) => {
-    //     const formattedDate = formatDate(date);
-
-    //     dispatch({ type: 'DELETE', date: formattedDate, index });
-    // };
 
     if (!isDataLoaded) {
         return <div>로딩 중입니다.</div>;
@@ -102,7 +54,7 @@ function DiaryList() {
                     </form>
                 </div>
                 <div id='diary-area'>
-                    <h2>나의 하루</h2>
+                    <h2 id='diary-header'>나의 하루</h2>
 
                     <ul id='diary-layer'>
                         {diary[formatDate(date)] &&

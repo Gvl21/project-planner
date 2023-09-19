@@ -1,9 +1,9 @@
 #clock {
     margin: 3px;
-    margin-top: 80px;
+    margin-top: 9vh;
     position: absolute;
-    right: 40px;
-    top: 3%;
+    right: 3vw;
+    top: 3vh;
     font-weight: bold;
     text-align: center;
     font-size: 2rem;

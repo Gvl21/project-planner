@@ -9,7 +9,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
+    padding-top: 3vh;
 }
 
 #map-layer h2 {
@@ -32,12 +32,14 @@
     font-weight: 600;
 }
 #distance-area {
+    display: flex;
     background-color: rgba(9, 50, 83, 0.308);
     color: white;
     text-align: center;
     align-items: center;
     padding: 0px 10px;
     margin: 4px;
-    border-radius: 10%;
+    height: 5vh;
+    border-radius: 10px;
     font-size: 1.1rem;
 }

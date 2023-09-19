@@ -83,23 +83,6 @@ function MiniDiary() {
                     </button>
                 </form>
                 <MiniList />
-                {/* <div id='diary-part'>
-                    <h2>나의 하루</h2>
-                    <ul>
-                        {diary[formatDate(date)] &&
-                            diary[formatDate(date)].map((e, idx) => (
-                                <li key={idx}>
-                                    {e}
-                                    <button
-                                        className='btnMini btnLightBlue'
-                                        onClick={() => handleDelete(idx)}
-                                    >
-                                        삭제
-                                    </button>
-                                </li>
-                            ))}
-                    </ul>
-                </div> */}
             </div>
         );
     }

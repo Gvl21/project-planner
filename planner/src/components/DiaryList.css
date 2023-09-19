@@ -11,7 +11,7 @@
 }
 
 #input-area form button {
-    width: 57.1px;
+    width: 57.9px;
     height: 34.5px;
 }
 
@@ -23,7 +23,7 @@
     font-size: 18px;
     padding: 3px;
 }
-#diary-area h2 {
+#diary-header {
     color: white;
     text-align: center;
     font-size: 1.8rem;
@@ -32,17 +32,19 @@
 }
 
 #diary-layer {
+    margin-top: 5px;
+
     padding-top: 10px;
     background-color: rgba(143, 117, 153, 0.555);
-    width: 58vw;
-    height: 45vh;
+    width: 64vw;
+    height: 43vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
     padding-left: 10px;
     overflow-x: hidden;
     overflow-y: auto;
-    border-radius: 2%;
+    border-radius: 15px;
 }
 
 #diary-plate {
@@ -51,7 +53,7 @@
     font-size: 16px;
     word-break: break-all;
     flex-direction: column;
-    width: 17vw;
+    width: 18.7vw;
     height: 18vh;
     background-color: #b75be2ab;
     list-style-type: none;
@@ -60,9 +62,10 @@
     white-space: pre-wrap;
     align-items: stretch;
     justify-content: space-between;
+    overflow-y: auto;
 }
 #diary-plate button {
-    width: 57.1px;
+    width: 57.9px;
     max-height: 34.5px;
     position: relative;
 

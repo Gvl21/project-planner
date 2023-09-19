@@ -7,7 +7,7 @@
 #mini-diary {
     color: white;
     text-align: left;
-    max-height: 550px;
+    height: 48vh;
     padding-left: 10px;
     padding-top: 10px;
     border: 8px rgba(28, 14, 158, 0.26) solid;
@@ -27,7 +27,7 @@
 }
 
 #diary-part {
-    margin-top: 50px;
+    margin-top: 20px;
     max-height: 370px;
 }
 
