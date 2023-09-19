@@ -73,7 +73,6 @@ function Weather() {
         const lng = currentLocation[1];
         getWeather(lat, lng);
         getAirPollution(lat, lng);
-        console.log(altCondition);
     }, [currentLocation]);
 
     return (
