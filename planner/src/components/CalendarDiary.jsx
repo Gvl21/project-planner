@@ -1,12 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Calendar from 'react-calendar';
 import './CalenderDiary.css';
 import DiaryList from './DiaryList';
-import { DiaryContext, StateContext } from '../App';
+import { StateContext } from '../App';
 
 function CalendarDiary() {
-    const { date, handleDateChange, formatDate } = useContext(StateContext);
-    const { diary } = useContext(DiaryContext);
+    const { date, handleDateChange } = useContext(StateContext);
 
     return (
         <div id='calendar-parts'>

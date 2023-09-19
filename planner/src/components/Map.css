@@ -9,12 +9,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 0;
+    padding-top: 50px;
 }
 
-#map-layer h3 {
+#map-layer h2 {
     margin-bottom: 0;
     font-size: 1.6rem;
+    color: white;
+    background-color: rgba(9, 50, 83, 0.308);
 }
 
 #router-button {
@@ -28,4 +30,14 @@
 }
 #router-button:hover {
     font-weight: 600;
+}
+#distance-area {
+    background-color: rgba(9, 50, 83, 0.308);
+    color: white;
+    text-align: center;
+    align-items: center;
+    padding: 0px 10px;
+    margin: 4px;
+    border-radius: 10%;
+    font-size: 1.1rem;
 }

@@ -36,6 +36,8 @@
 }
 #diary-part button {
     margin-left: 10px;
+    max-height: 29px;
+    min-width: 49.1px;
 }
 #diary-part li {
     display: flex;

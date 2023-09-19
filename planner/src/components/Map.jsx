@@ -226,7 +226,6 @@ function Map() {
 
     return (
         <div id='map-layer'>
-            <h3>현재 위치</h3>
             <div id='map'></div>
             <button
                 id='router-button'
@@ -236,7 +235,7 @@ function Map() {
                 여기로 가보기
             </button>
 
-            <>
+            <div id='distance-area'>
                 {distance > 0 ? (
                     <h3>
                         {point}까지 {distance}M 입니다
@@ -244,7 +243,7 @@ function Map() {
                 ) : (
                     <h3>거리를 측정합니다</h3>
                 )}
-            </>
+            </div>
         </div>
     );
 }

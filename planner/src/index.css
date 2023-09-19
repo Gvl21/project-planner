@@ -37,7 +37,7 @@ button:hover {
 #navi-main {
     position: absolute;
     display: flex;
-    height: 80px;
+    height: 90px;
     width: 180px;
     font-size: 1.8rem;
     align-items: center;
@@ -50,7 +50,7 @@ button:hover {
 #navi-diary {
     position: absolute;
     display: flex;
-    height: 80px;
+    height: 90px;
     width: 180px;
     font-size: 1.8rem;
     align-items: center;
@@ -58,4 +58,5 @@ button:hover {
     right: 50px;
     bottom: 100px;
     background-color: rgb(9, 50, 83);
+    padding: 6px 12px;
 }
