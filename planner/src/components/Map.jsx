@@ -185,7 +185,7 @@ function Map() {
         );
         const tempDistance = routeData.routes[0].summary.distance;
 
-        setPoint(arrivePoint || '목적지');
+        setPoint(arrivePoint === 'your destination' || '목적지');
         setDistance(tempDistance);
 
         const encodedRoute = routeData.routes[0].geometry;
