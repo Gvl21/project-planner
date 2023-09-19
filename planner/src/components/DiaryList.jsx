@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { formatDate } from '../util';
 import { DiaryContext, StateContext } from '../App';
 import './DiaryList.css';

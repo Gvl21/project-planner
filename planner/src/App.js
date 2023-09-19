@@ -6,9 +6,12 @@ import Diary from './pages/Diary';
 import { formatDate } from './util';
 import styled from 'styled-components';
 
-import img1 from './images/bg_2.jpg';
+import img1 from './images/bg_1.jpg';
+import img2 from './images/bg_2.jpg';
+import img3 from './images/bg_3.jpg';
+import img4 from './images/bg_4.jpg';
 
-const backgroundArr = [img1];
+const backgroundArr = [img1, img2, img3, img4];
 const randomIndex = Math.floor(Math.random() * backgroundArr.length);
 const backgroundImg = backgroundArr[randomIndex];
 
