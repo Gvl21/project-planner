@@ -84,33 +84,39 @@ function DiaryList() {
     } else {
         return (
             <div>
-                <div>
-                    <h2>{formatDate(date)}</h2>
+                <div id='input-area'>
+                    <h2>{formatDate(date).substring(4)}의 다이어리</h2>
                     <form onSubmit={handleDiarySubmit}>
                         <textarea
+                            id='text-area'
                             rows='4'
-                            cols='40'
+                            cols='50'
                             placeholder='나의 하루는?'
                             value={newText}
                             onChange={handleDiaryChange}
                         />
                         <br />
-                        <button type='submit'>저장</button>
+                        <button className='btnMini btnBlueGreen' type='submit'>
+                            저장
+                        </button>
                     </form>
                 </div>
-                <div>
+                <div id='diary-area'>
                     <h2>나의 하루</h2>
+
                     <ul id='diary-layer'>
                         {diary[formatDate(date)] &&
                             diary[formatDate(date)].map((e, idx) => (
                                 <li id='diary-plate' key={idx}>
-                                    {e}
-                                    <button
-                                        className='btnOrange btnMini'
-                                        onClick={() => handleDelete(idx)}
-                                    >
-                                        삭제
-                                    </button>
+                                    <div>{e}</div>
+                                    <div>
+                                        <button
+                                            className='btnOrange btnMini'
+                                            onClick={() => handleDelete(idx)}
+                                        >
+                                            삭제
+                                        </button>
+                                    </div>
                                 </li>
                             ))}
                     </ul>

@@ -2,23 +2,29 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
 }
+#calendar-parts h1 {
+    color: white;
+    text-align: center;
+}
 #calendar-layer {
     text-align: center;
     margin: 30px;
+    margin-top: 8vh;
+    width: 80%;
 }
 #diary-list {
     margin-left: 15px;
 }
 
 .react-calendar {
-    width: 500px;
-    height: 300px;
+    width: 600px;
+    height: 450px;
     max-width: 100%;
     background: rgb(255, 214, 245);
     border: 2px solid #c28585;
-    font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
     border-radius: 20px;
+    opacity: 0.9;
 }
 
 .react-calendar--doubleView {
@@ -60,7 +66,7 @@
     margin-bottom: 1em;
 }
 .react-calendar__navigation__label > span {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 900;
     color: black;
 }
@@ -83,7 +89,10 @@
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.3rem;
+}
+abbr[title] {
+    text-decoration: none;
 }
 
 .react-calendar__month-view__weekdays__weekday {
@@ -111,13 +120,17 @@
 .react-calendar__century-view .react-calendar__tile {
     padding: 2em 0.5em;
 }
+.react-calendar__navigation__arrow {
+    font-size: 1.5rem;
+}
 
 .react-calendar__tile {
     max-width: 100%;
-    padding: 10px 6.6667px;
+    padding: 20px 6.6667px;
     background: none;
     text-align: center;
     line-height: 16px;
+    font-size: 1.3rem;
 }
 
 .react-calendar__tile:disabled {

@@ -5,19 +5,21 @@
 }
 
 #mini-diary {
+    color: white;
     text-align: left;
     max-height: 550px;
     padding-left: 10px;
     padding-top: 10px;
-    border: 4px rgb(27, 156, 81) solid;
+    border: 8px rgba(28, 14, 158, 0.26) solid;
     border-radius: 5%;
-    background-color: #9ee695;
-    opacity: 0.9;
+    background-color: rgba(9, 50, 83, 0.329);
+    overflow: hidden;
 }
 
 #submit-part input {
     margin-right: 12px;
     width: 70%;
+    font-size: 18px;
 }
 #submit-part h2 {
     font-size: 1.8rem;
@@ -39,9 +41,17 @@
     display: flex;
     justify-content: space-between;
     margin-left: 0;
-    padding-left: 0;
+    padding-left: 15px;
     margin-bottom: 10px;
     padding-right: 50px;
     list-style-type: '👉';
     word-break: break-all;
+}
+#mini-list {
+    font-size: 20px;
+    padding-bottom: 0;
+}
+
+#mini-list button {
+    font-size: 0.85rem;
 }

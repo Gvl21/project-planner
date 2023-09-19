@@ -30,7 +30,7 @@ function MiniDiary() {
                 <ul>
                     {diary[formatDate(date)] &&
                         diary[formatDate(date)].slice(0, 7).map((e, idx) => (
-                            <li key={idx}>
+                            <li id='mini-list' key={idx}>
                                 {e}
                                 <button
                                     className='btnMini btnLightBlue'

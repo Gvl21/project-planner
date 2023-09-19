@@ -22,11 +22,7 @@ function Main() {
                 <Map />
                 <MiniDiary />
             </div>
-            <button
-                id='navi-main'
-                className='btnMini btnOrange'
-                onClick={goDiary}
-            >
+            <button id='navi-main' className='btnMini' onClick={goDiary}>
                 {' '}
                 다이어리
                 <br /> 페이지{'>>'}{' '}

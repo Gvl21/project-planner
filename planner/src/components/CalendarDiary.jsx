@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import Calendar from 'react-calendar';
 import './CalenderDiary.css';
 import DiaryList from './DiaryList';
-import { StateContext } from '../App';
+import { DiaryContext, StateContext } from '../App';
 
 function CalendarDiary() {
-    const { date, handleDateChange } = useContext(StateContext);
+    const { date, handleDateChange, formatDate } = useContext(StateContext);
+    const { diary } = useContext(DiaryContext);
 
     return (
         <div id='calendar-parts'>
@@ -14,12 +15,13 @@ function CalendarDiary() {
                 <Calendar
                     onChange={handleDateChange}
                     value={date}
+                    calendarType={'gregory'}
                     formatDay={(locale, date) =>
                         date.toLocaleString('en', { day: 'numeric' })
                     }
                 />
             </div>
-            <div id='diary-list'>
+            <div>
                 <DiaryList />
             </div>
         </div>

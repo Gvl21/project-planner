@@ -1,8 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { StateContext } from '../App';
 import './Weather.css';
+import styled from 'styled-components';
 
 const API_KEY_WEATHER = '454424e4d734ed439e4de2476b24c478';
+
+const Container = styled.div`
+    color: white;
+`;
 
 function Weather() {
     const { currentLocation } = useContext(StateContext);
@@ -52,6 +57,7 @@ function Weather() {
             return <p>미세먼지가 심해요. 마스크 챙기세요.</p>;
         } else return <p>오늘도 즐거운 산책!</p>;
     };
+
     useEffect(() => {
         if (!currentLocation) return;
         const lat = currentLocation[0];
@@ -62,31 +68,34 @@ function Weather() {
 
     return (
         <div id='weather'>
-            <div id='weather-header'>
-                <Message />
-                <p id='condition'>
-                    날씨 :
-                    <img
-                        src={`http://openweathermap.org/img/w/${condition}.png`}
-                        alt={altCondition}
-                    />
-                </p>
-            </div>
-            <div id='weather-side'>
-                <p>
-                    {city}의 기온 : {temperature}
-                </p>
+            {' '}
+            <Container>
+                <div id='weather-header'>
+                    <Message />
+                    <p id='condition'>
+                        날씨 :
+                        <img
+                            src={`http://openweathermap.org/img/w/${condition}.png`}
+                            alt={altCondition}
+                        />
+                    </p>
+                </div>
+                <div id='weather-side'>
+                    <p>
+                        {city}의 기온 : {temperature}
+                    </p>
 
-                <p>
-                    미세먼지 : <AirDesc />
-                    <span className='air-pol'>{airPollution[0]}</span>
-                </p>
-                <p>
-                    {' '}
-                    초미세먼지 : <AirDesc1 />
-                    <span className='air-pol'>{airPollution[1]}</span>
-                </p>
-            </div>
+                    <p>
+                        미세먼지 : <AirDesc />
+                        <span className='air-pol'>{airPollution[0]}</span>
+                    </p>
+                    <p>
+                        {' '}
+                        초미세먼지 : <AirDesc1 />
+                        <span className='air-pol'>{airPollution[1]}</span>
+                    </p>
+                </div>
+            </Container>
         </div>
     );
 }
