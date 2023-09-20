@@ -52,9 +52,19 @@ function Weather() {
     };
     const Message = () => {
         if (airPollution[0] >= 76 || airPollution[1] >= 66) {
-            return <p>미세먼지가 너무 심해요. 외출하지마세요.</p>;
+            return (
+                <p>
+                    미세먼지가 너무 심해요. <br />
+                    외출하지마세요.
+                </p>
+            );
         } else if (airPollution[0] >= 36 || airPollution[1] >= 36) {
-            return <p>미세먼지가 심해요. 마스크 챙기세요.</p>;
+            return (
+                <p>
+                    미세먼지가 심해요. <br />
+                    마스크 챙기세요.
+                </p>
+            );
         } else return <p>오늘도 즐거운 산책!</p>;
     };
     // const Message1 = () => {

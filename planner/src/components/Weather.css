@@ -19,11 +19,11 @@
 }
 
 #weather-header {
-    font-size: 3rem;
+    font-size: 2.6rem;
     font-weight: bolder;
     margin: 2px;
     position: absolute;
-    top: 170px;
+    top: 175px;
     left: 50vw;
     text-align: center;
     display: flex;
